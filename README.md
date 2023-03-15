@@ -11,7 +11,9 @@ Projeto MongoDB com Spring Boot
 
 <hr>
 
-![Imagem](https://github.com/DaniloADamasceno/API-Rest-com-Spring-Boot/blob/main/Imag2.png)
+![Imagem](https://raw.githubusercontent.com/DaniloADamasceno/API-Rest-com-Spring-Boot/main/Imagens/java%20mongoDB.png)
+
+
 
 - [ ] Compreender as principais diferenças entre paradigma orientado a documentos e relacional
 
@@ -41,6 +43,8 @@ Projeto MongoDB com Spring Boot
    <h3> Os Servidores da HEROKU agora não contam mais coom planos gratuitos e por conta disso o app não foi implemtnado na plataforma.</h3>
 
 <hr> -->
+
+![Imagem](https://raw.githubusercontent.com/DaniloADamasceno/API-Rest-com-Spring-Boot/main/Imagens/mongoDB%20crud.jpg)
 
 ## Autores
 
