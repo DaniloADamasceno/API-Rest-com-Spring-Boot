@@ -1,14 +1,16 @@
 package com.modulo24.domain;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "usuario")
+@Document(collection = "user")
 public class User implements Serializable {
 
     @Serial

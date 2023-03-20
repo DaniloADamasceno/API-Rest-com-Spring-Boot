@@ -1,0 +1,10 @@
+package com.modulo24.repository;
+
+import com.modulo24.domain.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+// <User, String>  ->  <Entidade, Tipo do ID da Entidade>
+public interface RepositoryUser extends MongoRepository<User, String> {
+}
