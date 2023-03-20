@@ -1,6 +1,7 @@
 package com.modulo24.resources;
 
 import com.modulo24.domain.User;
+import com.modulo24.dto.UserDTO;
 import com.modulo24.service.ServiceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -19,8 +21,9 @@ public class ResourcesUser {
     private ServiceUser serviceUser;
 
     @GetMapping
-    public ResponseEntity<List <User> >findAll() {
+    public ResponseEntity<List <UserDTO> >findAll() {
         List<User> userList = serviceUser.findAll();
-        return ResponseEntity.ok().body(userList);
+        List<UserDTO> userDTOList = userList.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(userDTOList);
     }
 }
