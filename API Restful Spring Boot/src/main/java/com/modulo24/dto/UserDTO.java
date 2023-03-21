@@ -4,7 +4,6 @@ import com.modulo24.domain.User;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 
 public class UserDTO implements Serializable {
 
