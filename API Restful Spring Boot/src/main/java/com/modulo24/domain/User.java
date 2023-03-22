@@ -1,5 +1,6 @@
 package com.modulo24.domain;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
@@ -7,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "user")
@@ -19,12 +22,11 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    //@Column(name = "nome", nullable = false, length = 250)
     private String name;
-
-    //@Column(name = "email", nullable = false, length = 100)
     private String email;
 
+    @DBRef(lazy = true) // Lazy = true: Carrega os posts somente quando forem acessados
+    private List<Post> posts = new ArrayList<>();
 
     //?----------------------------------------   Constructors   -------------------------------------------------------
     public User() {
@@ -62,8 +64,15 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
 
-    //?----------------------------------------   HashCode and Equals   ------------------------------------------------
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+//?----------------------------------------   HashCode and Equals   ------------------------------------------------
 
     @Override
     public boolean equals(Object o) {

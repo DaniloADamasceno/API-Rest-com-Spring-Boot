@@ -54,10 +54,24 @@ public class Instantiation implements CommandLineRunner {
         Post post6 = new Post(null, sFormatBR.parse("21/05/2022"), "mas ja ", "Mas ja , Achei que iria fica ai por mais tempo ", new AuthorDTO(userMalu));
         Post post7 = new Post(null, sFormatBR.parse("21/05/2022"), "Rolezando", "Aproveita que esta voltando é vamos logo marcar aquele rolezinho maroto", new AuthorDTO(userSnow));
 
+        // SALVAR OS POSTS NO BANCO DE DADOS
+        repositoryPost.saveAll(Arrays.asList(post1, post2, post3, post4, post5, post6, post7));
 
-        repositoryPost.saveAll(Arrays.asList(post1, post2, post3, post4, post5)); // Salva os posts no banco de dados
 
-        //?------------------------------------   Criação de uns COMENTÁRIOS para teste   ------------------------------
+        //?------------------------------------   Associação de Posts aos respectivos Usuarios   -----------------------
+        userNina.getPosts().addAll(Arrays.asList(post1, post5));
+        userFred.getPosts().addAll(Arrays.asList(post3));
+        userSnow.getPosts().addAll(Arrays.asList(post2, post7));
+        userMaggie.getPosts().addAll(Arrays.asList(post4));
+
+
+        //?------------------------------------   Salva os usuários com os posts associados   ---------------------------
+        repositoryUser.save(userNina);
+        repositoryUser.save(userFred);
+        repositoryUser.save(userSnow);
+        repositoryUser.save(userMaggie);
+        repositoryUser.save(userMalu);
+
 
 
     }

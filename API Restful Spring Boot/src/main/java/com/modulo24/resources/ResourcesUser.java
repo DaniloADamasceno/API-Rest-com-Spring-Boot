@@ -1,5 +1,6 @@
 package com.modulo24.resources;
 
+import com.modulo24.domain.Post;
 import com.modulo24.domain.User;
 import com.modulo24.dto.UserDTO;
 import com.modulo24.service.ServiceUser;
@@ -30,7 +31,7 @@ public class ResourcesUser {
     }
 
     // FIND BY ID
-    @RequestMapping(value = "/{id}, method = RequestMethod.GET")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> findAllById(@PathVariable String id) {  // --> PathVariable para receber o ID do usuário
         User userTestId = serviceUser.findAllById(id);
         return ResponseEntity.ok().body(new UserDTO(userTestId));
@@ -61,5 +62,12 @@ public class ResourcesUser {
         userUpdate.setId(id);
         userUpdate = serviceUser.update(id, userUpdate);
         return ResponseEntity.ok().body(new UserDTO(userUpdate));
+    }
+
+    // FETCH ID BY POST
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {  // --> PathVariable para receber o ID do usuário
+        User userTestPosts = serviceUser.findAllById(id);
+        return ResponseEntity.ok().body(userTestPosts.getPosts());
     }
 }
