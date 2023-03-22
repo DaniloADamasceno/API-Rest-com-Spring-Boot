@@ -1,6 +1,6 @@
 package com.modulo24.domain;
 
-import com.modulo24.dto.AutorDTO;
+import com.modulo24.dto.AuthorDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
@@ -25,19 +25,19 @@ public class Post implements Serializable {
     private String title;
     private String body;
 
-    private User author;
+    private AuthorDTO authorDTO;
 
 
     //?----------------------------------------   Constructors   -------------------------------------------------------
-    public Post(String id, Date parse, String title, String body, AutorDTO autorDTO) {
+    public Post() {
     }
 
-    public Post(String id, Date date, String title, String body, User author) {
+    public Post(String id, Date date, String title, String body, AuthorDTO authorDTO) {
         this.id = id;
         this.date = date;
         this.title = title;
         this.body = body;
-        this.author = author;
+        this.authorDTO = authorDTO;
     }
 
     //?----------------------------------------   Getters and Setters   ------------------------------------------------
@@ -74,12 +74,12 @@ public class Post implements Serializable {
         this.body = body;
     }
 
-    public User getAuthor() {
-        return author;
+    public AuthorDTO getAuthorDTO() {
+        return authorDTO;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setAuthorDTO(AuthorDTO authorDTO) {
+        this.authorDTO = authorDTO;
     }
 
 //?----------------------------------------   HashCode and Equals   ------------------------------------------------

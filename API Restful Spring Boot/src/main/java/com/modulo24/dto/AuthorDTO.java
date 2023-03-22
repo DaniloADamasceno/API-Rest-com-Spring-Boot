@@ -5,7 +5,7 @@ import com.modulo24.domain.User;
 import java.io.Serial;
 import java.io.Serializable;
 
-public class AutorDTO implements Serializable {
+public class AuthorDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -15,10 +15,10 @@ public class AutorDTO implements Serializable {
 
 
     //?----------------------------------------   Constructors   -------------------------------------------------------
-    public AutorDTO() {
+    public AuthorDTO() {
     }
 
-    public AutorDTO(User userDTO) {
+    public AuthorDTO(User userDTO) {
         id = userDTO.getId();
         name = userDTO.getName();
     }
