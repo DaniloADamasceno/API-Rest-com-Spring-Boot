@@ -1,6 +1,7 @@
 package com.modulo24.domain;
 
 import com.modulo24.dto.AuthorDTO;
+import com.modulo24.dto.CommentDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "post")
@@ -26,6 +29,8 @@ public class Post implements Serializable {
     private String body;
 
     private AuthorDTO authorDTO;
+
+    private List<CommentDTO> comments = new ArrayList<>();
 
 
     //?----------------------------------------   Constructors   -------------------------------------------------------
@@ -82,7 +87,15 @@ public class Post implements Serializable {
         this.authorDTO = authorDTO;
     }
 
-//?----------------------------------------   HashCode and Equals   ------------------------------------------------
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
+    }
+
+    //?----------------------------------------   HashCode and Equals   ------------------------------------------------
 
     @Override
     public boolean equals(Object o) {
