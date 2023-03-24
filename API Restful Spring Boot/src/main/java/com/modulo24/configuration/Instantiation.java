@@ -32,8 +32,12 @@ public class Instantiation implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        //?--------------------------------   Criação de uns USUÀRIOS para teste   -------------------------------------
+        //?---------------   Deletando os dados do banco de dados antes de Carregar novos dados   ----------------------
         repositoryUser.deleteAll(); // Deleta todos os usuários do banco de dados antes de criar outros novos usuários
+        repositoryPost.deleteAll(); // Deleta todos os posts do banco de dados antes de criar outros novos posts
+
+
+        //?--------------------------------   Criação de uns USUÀRIOS para teste   -------------------------------------
 
         User userNina   = new User(null, "Nina", "Nina@Hotmail.co");
         User userFred   = new User(null, "Frederico", "Frederico@yahoo.com");
@@ -45,7 +49,6 @@ public class Instantiation implements CommandLineRunner {
 
 
         //?------------------------------------   Criação de uns POSTS para teste   ------------------------------------
-        repositoryPost.deleteAll(); // Deleta todos os posts do banco de dados antes de criar outros novos posts
 
         Post post1 = new Post(null, FormatDateBR.parse("10/05/2021"), "Partiuuuuuu", "Estou indo viajar, não sei quando irei retornar ", new AuthorDTO(userNina));
         Post post2 = new Post(null, FormatDateBR.parse("13/02/2022"), "Fome de dragão", "Acho que a Fome bateu aqui ...", new AuthorDTO(userSnow));
@@ -57,7 +60,7 @@ public class Instantiation implements CommandLineRunner {
 
 
         //?------------------------------------   Criação de Commentarios    -------------------------------------------
-        CommentDTO comment1 = new CommentDTO("Boa viagem , aproveite bastante",FormatDateBR.parse("10/05/2021") , new AuthorDTO(userFred));
+        CommentDTO comment1 = new CommentDTO("Boa viagem , aproveite bastante", FormatDateBR.parse("10/05/2021"), new AuthorDTO(userFred));
         CommentDTO comment2 = new CommentDTO("Se For lanchar me chame que eu vou...", FormatDateBR.parse("13/02/2022"), new AuthorDTO(userMaggie));
         CommentDTO comment3 = new CommentDTO("Por aqui tudo beleza, so o frio que ta incomodando", FormatDateBR.parse("08/08/2020"), new AuthorDTO(userSnow));
         CommentDTO comment4 = new CommentDTO("Mas ja ? ", FormatDateBR.parse("21/05/2021"), new AuthorDTO(userMalu));

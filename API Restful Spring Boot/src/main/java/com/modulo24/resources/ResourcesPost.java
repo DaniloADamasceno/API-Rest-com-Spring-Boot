@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.OptionalLong;
 
 
 @RestController
@@ -21,7 +23,7 @@ public class ResourcesPost {
     //?-----------------------------------   Methods   -----------------------------------------------------------------
     // FIND BY ID
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Post> findAllById(@PathVariable String id) {  // --> PathVariable para receber o ID do usuário
+    public ResponseEntity<Post> findAllById(@PathVariable String id) {                  // --> PathVariable para receber o ID do usuário
         Post postAllById = servicePost.findAllById(id);
         return ResponseEntity.ok().body(postAllById);
     }
@@ -34,4 +36,17 @@ public class ResourcesPost {
         return ResponseEntity.ok().body(postAllById);
     }
 
+    // FULL SEARCH
+    @RequestMapping(value = "/fullsearch", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> fullSearch(
+            @RequestParam(value = "text", defaultValue = "") String text,               // --> Primeiro parametro do método é o texto
+            @RequestParam(value = "minDate", defaultValue = "") String minDate,         // --> Segndo parametro do método é a data mínima
+            @RequestParam(value = "maxDate", defaultValue = "") String maxDate) {       // --> Terceiro parametro do método é a data máxima
+        text = URL.decodeParam(text);                                                   // --> Decodifica o texto
+        Date min = URL.convertDate(minDate, new Date(0L));                        // --> Converte a data mínima
+        Date max = URL.convertDate(maxDate, new Date());                                // --> Converte a data máxima
+
+        List<Post> postAllById = servicePost.fullSearch(text, min, max);
+        return ResponseEntity.ok().body(postAllById);
+    }
 }
