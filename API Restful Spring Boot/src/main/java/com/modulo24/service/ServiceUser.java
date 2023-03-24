@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceUser {
@@ -25,16 +26,20 @@ public class ServiceUser {
 
     // FIND ALL BY ID
     public User findAllById(String id) { //-->  Método que retorna todos os usuários através do ID
-        User user = repositoryUser.findById(id).orElse(null);
-        if (user == null) {
-            throw new ObjectNotFoundException("⚠️ User not found / Usuário não encontrado ⚠️");
-        }
-        return user;
+        Optional<User> userOptional = repositoryUser.findById(id);
+        return userOptional.orElseThrow(() -> new ObjectNotFoundException("⚠️ Object not found  / Objeto não encontrado ⚠️"));
     }
 
     // INSERT
     public User insert(User userInsert) {  //-->  Método que INSERT um usuário
         return repositoryUser.insert(userInsert);
+    }
+
+    // UPDATE
+    public User update(@PathVariable String id, @RequestBody User userUpdate) {
+        User newUserUpdate = findAllById(userUpdate.getId());
+        updateData(newUserUpdate, userUpdate);
+        return repositoryUser.save(newUserUpdate);
     }
 
     // DELETE
@@ -48,12 +53,6 @@ public class ServiceUser {
         return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 
-    // UPDATE
-    public User update(@PathVariable String id, @RequestBody User userUpdate) {
-        User newUserUpdate = findAllById(userUpdate.getId());
-        updateData(newUserUpdate, userUpdate);
-        return repositoryUser.save(newUserUpdate);
-    }
 
     //? -----------------------------------   Private Methods   --------------------------------------------------------
     private void updateData(User newUser, User userUpdate) {    //-->  Método que atualiza os dados do usuário

@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-// <User, String>  ->  <Entidade, Tipo do ID da Entidade>
 public interface RepositoryUser extends MongoRepository<User, String> {
+// <User, String>  ->  <Entidade, Tipo do ID da Entidade>
 }
